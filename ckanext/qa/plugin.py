@@ -4,6 +4,11 @@ import types
 import ckan.model as model
 import ckan.plugins as p
 
+# Fix for Kombu 2.5.0 and Python 2.7.11
+import uuid
+if not hasattr(uuid, '_uuid_generate_random'):
+    uuid._uuid_generate_random = None
+
 from ckanext.archiver.interfaces import IPipe
 from ckanext.qa.logic import action, auth
 from ckanext.qa.model import QA, aggregate_qa_for_a_dataset
